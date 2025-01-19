@@ -14,15 +14,19 @@ function sortTable(columnIndex) {
 
     // Special condition for column 3 (Salary) and converting data to numbers
     if (columnIndex === 3) {
-      const numA = parseFloat(cellA.replace(/[^0-9.-]+/g, ''));
-      const numB = parseFloat(cellB.replace(/[^0-9.-]+/g, ''));
+      const salaryA = parseFloat(cellA.replace(/[^0-9.-]+/g, ''));
+      const salaryB = parseFloat(cellB.replace(/[^0-9.-]+/g, ''));
 
-      return numA - numB; // Sort as numbers
+      return salaryA - salaryB; // Sort as numbers
     }
 
-    // Condition to compare strings when values are not numbers
-    if (!isNaN(cellA) && !isNaN(cellB)) {
-      return cellA - cellB;
+    // Convert to numbers for other columns and handle non-numeric values
+    const valueA = parseFloat(cellA);
+    const valueB = parseFloat(cellB);
+
+    // Check if both values are numeric and compare
+    if (!Number.isNaN(valueA) && !Number.isNaN(valueB)) {
+      return valueA - valueB; // Sort as numbers
     } else {
       return cellA.localeCompare(cellB); // Compare strings alphabetically
     }
